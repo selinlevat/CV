@@ -1,2 +1,2 @@
-# CV
-yaptığı ve yapmakta olduğum çalışmlar
+git branch -M main
+git remote -v
