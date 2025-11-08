@@ -1,0 +1,1310 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'coordinator') {
+    header('Location: login.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinator Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <div class="container mt-5">
+        <h1 class="text-center">Welcome to the Coordinator Dashboard</h1>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Organize Events</h5>
+                        <a href="organize_events.php" class="btn btn-primary">Go to Organize Events</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Monitor Resources</h5>
+                        <a href="monitor_resources.php" class="btn btn-primary">Go to Monitor Resources</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ngo_aomsys";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
+</nav>
+<?php
+session_start();
+if ($_SESSION['role'] != 'admin') {
+    header("Location: login.php");
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <div class="container mt-5">
+        <h1 class="text-center">Welcome, Admin!</h1>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Manage Users</h5>
+                        <a href="manage_users.php" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Monitor Resources</h5>
+                        <a href="monitor_resources.php" class="btn btn-primary">Go to Monitor Resources</a>
+                    </div>
+                </div>
+            </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+
+<?php
+session_start();
+include 'config.php';
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'indigent') {
+    header('Location: login.php');
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user_id = $_SESSION['user_id'];
+    $monthly_income = $_POST['monthly_income'];
+    $household_size = $_POST['household_size'];
+    $num_children = $_POST['num_children'];
+    $education_status = json_encode($_POST['education_status']);
+    $employment_status = $_POST['employment_status'];
+    $monthly_expenditures = $_POST['monthly_expenditures'];
+    $support_needed = $_POST['support_needed'];
+
+    $query = "INSERT INTO aid_requests (indigent_id, monthly_income, household_size, num_children, education_status, employment_status, monthly_expenditures, support_needed) VALUES ('$user_id', '$monthly_income', '$household_size', '$num_children', '$education_status', '$employment_status', '$monthly_expenditures', '$support_needed')";
+    if (mysqli_query($conn, $query)) {
+        echo "Aid request submitted successfully.";
+    } else {
+        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Aid Request</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <form class="form-group" method="POST" action="aid_request.php">
+        Monthly Income: <input class="form-control" type="text" name="monthly_income" required><br>
+        Household Size: <input class="form-control" type="text" name="household_size" required><br>
+        Number of Children: <input class="form-control" type="text" name="num_children" required><br>
+        Education Status (JSON format): <textarea name="education_status" required></textarea><br>
+        Employment Status: <input class="form-control" type="text" name="employment_status" required><br>
+        Monthly Expenditures: <input class="form-control" type="text" name="monthly_expenditures" required><br>
+        Support Needed: <select class="form-control" name="support_needed">
+            <option value="furniture">Furniture</option>
+            <option value="food">Food</option>
+            <option value="cash">Cash</option>
+            <option value="medical">Medical</option>
+        </select><br>
+        <input class="form-control" type="submit" value="Request Aid">
+    </form>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+session_start();
+include 'config.php';
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    echo "You need to log in first.";
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+
+// Initialize variables with default values
+$profession = '';
+$avg_income = '';
+$region = '';
+$transport_availability = 'yes';
+$edit_mode = false;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['update'])) {
+        $profession = mysqli_real_escape_string($conn, $_POST['profession']);
+        $avg_income = mysqli_real_escape_string($conn, $_POST['avg_income']);
+        $region = mysqli_real_escape_string($conn, $_POST['region']);
+        $transport_availability = mysqli_real_escape_string($conn, $_POST['transport_availability']);
+
+        $query = "INSERT INTO volunteers (user_id, profession, avg_income, region, transport_availability) VALUES (?, ?, ?, ?, ?)
+                  ON DUPLICATE KEY UPDATE profession=VALUES(profession), avg_income=VALUES(avg_income), region=VALUES(region), transport_availability=VALUES(transport_availability)";
+
+        $stmt = $conn->prepare($query);
+        if ($stmt) {
+            $stmt->bind_param('issss', $user_id, $profession, $avg_income, $region, $transport_availability);
+            if ($stmt->execute()) {
+                echo "Volunteer profile updated successfully.";
+                $edit_mode = false; // Lock the form after updating
+            } else {
+                echo "Error executing query: " . htmlspecialchars($stmt->error);
+            }
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . htmlspecialchars($conn->error);
+        }
+    } elseif (isset($_POST['edit'])) {
+        $edit_mode = true; // Enable edit mode
+    }
+}
+
+// Fetch current volunteer details if available
+$query = "SELECT profession, avg_income, region, transport_availability FROM volunteers WHERE user_id = ?";
+$stmt = $conn->prepare($query);
+if ($stmt) {
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $stmt->bind_result($profession, $avg_income, $region, $transport_availability);
+    $stmt->fetch();
+    $stmt->close();
+}
+
+$conn->close();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Volunteer Dashboard</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1>Volunteer Dashboard</h1>
+    <h2>Profile</h2>
+    <form class="form-group" method="POST" action="volunteer_dashboard.php">
+        Profession: <input class="form-control" type="text" name="profession" value="<?php echo htmlspecialchars($profession); ?>" <?php if (!$edit_mode) echo 'readonly'; ?> required><br>
+        Average Annual Income: <input class="form-control" type="number" name="avg_income" value="<?php echo htmlspecialchars($avg_income); ?>" <?php if (!$edit_mode) echo 'readonly'; ?> required><br>
+        Region: <input class="form-control" type="text" name="region" value="<?php echo htmlspecialchars($region); ?>" <?php if (!$edit_mode) echo 'readonly'; ?> required><br>
+        Transport Availability: 
+        <select class="form-control" name="transport_availability" <?php if (!$edit_mode) echo 'disabled'; ?>>
+            <option value="yes" <?php if ($transport_availability == 'yes') echo 'selected'; ?>>Yes</option>
+            <option value="no" <?php if ($transport_availability == 'no') echo 'selected'; ?>>No</option>
+        </select><br>
+        <?php if ($edit_mode): ?>
+            <input class="form-control" type="submit" name="update" value="Update Profile">
+        <?php else: ?>
+            <input class="form-control" type="submit" name="edit" value="Edit Profile">
+        <?php endif; ?>
+    </form>
+    <form class="form-group" method="POST" action="logout.php">
+        <input class="form-control" type="submit" value="Logout">
+    </form>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+session_start();
+include 'config.php';
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'coordinator') {
+    header('Location: login.php');
+    exit();
+}
+
+$query = "SELECT * FROM aid_requests";
+$result = mysqli_query($conn, $query);
+$requests = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>View Aid Requests</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1>Aid Requests</h1>
+    <table class="table table-striped" border="1">
+        <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Indigent ID</th>
+            <th class="text-center">Monthly Income</th>
+            <th class="text-center">Household Size</th>
+            <th class="text-center">Number of Children</th>
+            <th class="text-center">Education Status</th>
+            <th class="text-center">Employment Status</th>
+            <th class="text-center">Monthly Expenditures</th>
+            <th class="text-center">Support Needed</th>
+            <th class="text-center">Request Date</th>
+        </tr>
+        <?php foreach ($requests as $request): ?>
+        <tr>
+            <td class="text-center"><?php echo $request['id']; ?></td>
+            <td class="text-center"><?php echo $request['indigent_id']; ?></td>
+            <td class="text-center"><?php echo $request['monthly_income']; ?></td>
+            <td class="text-center"><?php echo $request['household_size']; ?></td>
+            <td class="text-center"><?php echo $request['num_children']; ?></td>
+            <td class="text-center"><?php echo $request['education_status']; ?></td>
+            <td class="text-center"><?php echo $request['employment_status']; ?></td>
+            <td class="text-center"><?php echo $request['monthly_expenditures']; ?></td>
+            <td class="text-center"><?php echo $request['support_needed']; ?></td>
+            <td class="text-center"><?php echo $request['request_date']; ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <a href="operation_dashboard.php">Back to Dashboard</a>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'coordinator') {
+    header('Location: login.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Schedule Operations</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1>Schedule Operations</h1>
+    <!-- Form to schedule operations -->
+    <form class="form-group" method="POST" action="schedule_operations.php">
+        Operation Type: 
+        <select class="form-control" name="type">
+            <option value="collection">Collection</option>
+            <option value="distribution">Distribution</option>
+            <option value="publicity">Publicity</option>
+        </select><br>
+        Scheduled Date: <input class="form-control" type="date" name="scheduled_date" required><br>
+        Details: <textarea name="details"></textarea><br>
+        <input class="form-control" type="submit" value="Schedule">
+    </form>
+    <a href="coordinator_dashboard.php">Back to Dashboard</a>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+include 'config.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $email = $_POST['email'];
+    $role = $_POST['role'];
+
+    $query = "INSERT INTO users (username, password, email, role) VALUES ('$username', '$password', '$email', '$role')";
+    if (mysqli_query($conn, $query)) {
+        echo "Registration successful.";
+    } else {
+        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Register</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <form class="form-group" method="POST" action="register.php">
+        Username: <input class="form-control" type="text" name="username" required><br>
+        Password: <input class="form-control" type="password" name="password" required><br>
+        Email: <input class="form-control" type="email" name="email" required><br>
+        Role: <select class="form-control" name="role">
+            <option value="donor">Donor</option>
+            <option value="volunteer">Volunteer</option>
+            <option value="indigent">Indigent</option>
+            <option value="coordinator">Coordinator</option>
+        </select><br>
+        <input class="form-control" type="submit" value="Register">
+    </form>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'coordinator') {
+    header('Location: login.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Organize Publicity Events</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1>Organize Publicity Events</h1>
+    <!-- Form to organize publicity events -->
+    <form class="form-group" method="POST" action="organize_events.php">
+        Event Name: <input class="form-control" type="text" name="event_name" required><br>
+        Date: <input class="form-control" type="date" name="date" required><br>
+        Details: <textarea name="details"></textarea><br>
+        <input class="form-control" type="submit" value="Organize Event">
+    </form>
+    <a href="coordinator_dashboard.php">Back to Dashboard</a>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'coordinator') {
+    header('Location: login.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Operation Dashboard</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1>Welcome, Operation Coordinator!</h1>
+    <a href="view_requests.php">View Aid Requests</a><br>
+    <a href="logout.php">Logout</a>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] != 'coordinator' && $_SESSION['role'] != 'admin')) {
+    header('Location: login.php');
+    exit();
+}
+
+include 'config.php';
+
+// Fetch detailed donation information
+$query = "SELECT area, type, amount, shipping_preference FROM donations";
+$donations_result = mysqli_query($conn, $query);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Monitor Resources</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Monitoring Resources</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Area</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Shipping Preference</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = mysqli_fetch_assoc($donations_result)): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($row['area']); ?></td>
+                <td><?php echo htmlspecialchars($row['type']); ?></td>
+                <td><?php echo htmlspecialchars($row['amount']); ?></td>
+                <td><?php echo htmlspecialchars($row['shipping_preference']); ?></td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+<?php
+session_start();
+include 'config.php';
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    header('Location: login.php');
+    exit();
+}
+
+$query = "SELECT * FROM users";
+$result = mysqli_query($conn, $query);
+$users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Manage Users</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1>Users</h1>
+    <table class="table table-striped" border="1">
+        <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Username</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Role</th>
+            <th class="text-center">Action</th>
+        </tr>
+        <?php foreach ($users as $user): ?>
+        <tr>
+            <td class="text-center"><?php echo $user['id']; ?></td>
+            <td class="text-center"><?php echo $user['username']; ?></td>
+            <td class="text-center"><?php echo $user['email']; ?></td>
+            <td class="text-center"><?php echo $user['role']; ?></td>
+            <td class="text-center">
+                <a href="edit_user.php?id=<?php echo $user['id']; ?>">Edit</a>
+                <a href="delete_user.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <a href="admin_dashboard.php">Back to Dashboard</a>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+session_start();
+session_destroy();
+header('Location: login.php');
+?>
+</nav>
+<?php
+include 'config.php';
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM users WHERE username = '$username'";
+    $result = mysqli_query($conn, $query);
+    $user = mysqli_fetch_assoc($result);
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['role'] = $user['role'];
+        
+        // Redirect based on user role
+        switch ($user['role']) {
+            case 'admin':
+                header('Location: admin_dashboard.php');
+                break;
+            case 'volunteer':
+                header('Location: volunteer_dashboard.php');
+                break;
+            case 'donor':
+                header('Location: donor_dashboard.php');
+                break;
+            case 'indigent':
+                header('Location: indigent_dashboard.php');
+                break;
+            case 'coordinator':
+                header('Location: coordinator_dashboard.php');
+                break;
+            default:
+                echo "Invalid role.";
+                break;
+        }
+    } else {
+        echo "Invalid username or password.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.php">NGO Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="register.php">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Login
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="login.php">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="register.php">Don't have an account? Register here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'indigent') {
+    header('Location: login.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Indigent Dashboard</title>
+</head>
+<body>
+    <?php include('header.php'); ?>
+    <div class="container mt-5">
+        <h1 class="text-center">Welcome, Indigent!</h1>
+        <div class="text-center mt-4">
+            <a href="aid_request.php" class="btn btn-primary">Request Aid</a>
+            <a href="logout.php" class="btn btn-secondary">Logout</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<?php
+// index.php
+
+// Define an array of page names and their corresponding filenames
+$pages = [
+    'Login' => 'login.php',
+    'Register' => 'register.php'
+];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Management System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">NGO Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <?php foreach ($pages as $pageName => $filename): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= $filename ?>"><?= $pageName ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="text-center">Welcome to the NGO Management System</h1>
+        <div class="row justify-content-center mt-4">
+            <?php foreach ($pages as $pageName => $filename): ?>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $pageName ?></h5>
+                            <a href="<?= $filename ?>" class="btn btn-primary">Go to <?= $pageName ?></a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- header.php -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.php">NGO Management System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="login.php">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="register.php">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout.php">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<?php
+session_start();
+include 'config.php';
+
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    header('Location: login.php');
+    exit();
+}
+
+if (isset($_GET['id'])) {
+    $user_id = $_GET['id'];
+
+    // Fetch user details
+    $query = "SELECT id, username, email, role FROM users WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    if ($stmt) {
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        $stmt->bind_result($id, $username, $email, $role);
+        $stmt->fetch();
+        $stmt->close();
+    }
+
+    // Update user details
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $role = $_POST['role'];
+
+        $query = "UPDATE users SET username = ?, email = ?, role = ? WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        if ($stmt) {
+            $stmt->bind_param('sssi', $username, $email, $role, $user_id);
+            if ($stmt->execute()) {
+                echo "User updated successfully.";
+            } else {
+                echo "Error updating user: " . htmlspecialchars($stmt->error);
+            }
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . htmlspecialchars($conn->error);
+        }
+    }
+} else {
+    echo "No user ID specified.";
+    exit();
+}
+
+$conn->close();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Edit User</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1>Edit User</h1>
+    <form class="form-group" method="POST" action="edit_user.php?id=<?php echo $user_id; ?>">
+        Username: <input class="form-control" type="text" name="username" value="<?php echo htmlspecialchars($username); ?>" required><br>
+        Email: <input class="form-control" type="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required><br>
+        Role: <select class="form-control" name="role" required>
+            <option value="donor" <?php if ($role == 'donor') echo 'selected'; ?>>Donor</option>
+            <option value="volunteer" <?php if ($role == 'volunteer') echo 'selected'; ?>>Volunteer</option>
+            <option value="indigent" <?php if ($role == 'indigent') echo 'selected'; ?>>Indigent</option>
+            <option value="coordinator" <?php if ($role == 'coordinator') echo 'selected'; ?>>Coordinator</option>
+            <option value="admin" <?php if ($role == 'admin') echo 'selected'; ?>>Admin</option>
+        </select><br>
+        <input class="form-control" type="submit" value="Update User">
+    </form>
+    <a href="manage_users.php">Back to Manage Users</a>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'donor') {
+    header('Location: login.php');
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.php">NGO Management System</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="text-center">Donor Dashboard</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Donate</h5>
+                        <a href="donate.php" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Donation History</h5>
+                        <a href="donation_history.php" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<?php
+session_start();
+include 'config.php';
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'donor') {
+    header('Location: login.php');
+    exit();
+}
+
+$donor_id = $_SESSION['user_id'];
+$query = "SELECT * FROM donations WHERE donor_id = '$donor_id'";
+$result = mysqli_query($conn, $query);
+$donations = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Donation History</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <h1>Donation History</h1>
+    <table class="table table-striped" border="1">
+        <tr>
+            <th class="text-center">Area</th>
+            <th class="text-center">Type</th>
+            <th class="text-center">Amount</th>
+            <th class="text-center">Shipping Preference</th>
+            <th class="text-center">Date</th>
+        </tr>
+        <?php foreach ($donations as $donation): ?>
+        <tr>
+            <td class="text-center"><?php echo $donation['area']; ?></td>
+            <td class="text-center"><?php echo $donation['type']; ?></td>
+            <td class="text-center"><?php echo $donation['amount']; ?></td>
+            <td class="text-center"><?php echo $donation['shipping_preference']; ?></td>
+            <td class="text-center"><?php echo $donation['donation_date']; ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <a href="donor_dashboard.php">Back to Dashboard</a>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+session_start();
+include 'config.php';
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'donor') {
+    header('Location: login.php');
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $donor_id = $_SESSION['user_id'];
+    $area = $_POST['area'];
+    $type = $_POST['type'];
+    $amount = $_POST['amount'];
+    $shipping_preference = $_POST['shipping_preference'];
+
+    $query = "INSERT INTO donations (donor_id, area, type, amount, shipping_preference) VALUES ('$donor_id', '$area', '$type', '$amount', '$shipping_preference')";
+    if (mysqli_query($conn, $query)) {
+        echo "Donation successful.";
+    } else {
+        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Donate</title>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">NGO Management System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <form class="form-group" method="POST" action="donate.php">
+        Area: <input class="form-control" type="text" name="area" required><br>
+        Type: <select class="form-control" name="type">
+            <option value="cash">Cash</option>
+            <option value="food">Food</option>
+            <option value="clothing">Clothing</option>
+            <option value="furniture">Furniture</option>
+        </select><br>
+        Amount: <input class="form-control" type="text" name="amount" required><br>
+        Shipping Preference: <select class="form-control" name="shipping_preference">
+            <option value="self">Self</option>
+            <option value="collect">Collect</option>
+        </select><br>
+        <input class="form-control" type="submit" value="Donate">
+    </form>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
+</nav>
+<?php
+session_start();
+include 'config.php';
+
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    header('Location: login.php');
+    exit();
+}
+
+// Check if user ID is set
+if (isset($_GET['id'])) {
+    $user_id = $_GET['id'];
+
+    // Start transaction
+    $conn->begin_transaction();
+
+    // Delete related records from donations table
+    $query = "DELETE FROM donations WHERE donor_id = ?";
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param('i', $user_id);
+        if (!$stmt->execute()) {
+            echo "Error deleting donations: " . htmlspecialchars($stmt->error);
+            $conn->rollback();
+            exit();
+        }
+        $stmt->close();
+    } else {
+        echo "Error preparing statement for donations: " . htmlspecialchars($conn->error);
+        $conn->rollback();
+        exit();
+    }
+
+    // Delete related records from aid_requests table
+    $query = "DELETE FROM aid_requests WHERE indigent_id = ?";
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param('i', $user_id);
+        if (!$stmt->execute()) {
+            echo "Error deleting aid requests: " . htmlspecialchars($stmt->error);
+            $conn->rollback();
+            exit();
+        }
+        $stmt->close();
+    } else {
+        echo "Error preparing statement for aid requests: " . htmlspecialchars($conn->error);
+        $conn->rollback();
+        exit();
+    }
+
+    // Delete related records from volunteers table
+    $query = "DELETE FROM volunteers WHERE user_id = ?";
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param('i', $user_id);
+        if (!$stmt->execute()) {
+            echo "Error deleting volunteers: " . htmlspecialchars($stmt->error);
+            $conn->rollback();
+            exit();
+        }
+        $stmt->close();
+    } else {
+        echo "Error preparing statement for volunteers: " . htmlspecialchars($conn->error);
+        $conn->rollback();
+        exit();
+    }
+
+    // Delete user from users table
+    $query = "DELETE FROM users WHERE id = ?";
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param('i', $user_id);
+        if ($stmt->execute()) {
+            echo "User deleted successfully.";
+        } else {
+            echo "Error deleting user: " . htmlspecialchars($stmt->error);
+            $conn->rollback();
+            exit();
+        }
+        $stmt->close();
+    } else {
+        echo "Error preparing statement for user: " . htmlspecialchars($conn->error);
+        $conn->rollback();
+        exit();
+    }
+
+    // Commit transaction
+    $conn->commit();
+} else {
+    echo "No user ID specified.";
+}
+
+// Close the connection
+$conn->close();
+
+// Redirect to manage_users.php
+header('Location: manage_users.php');
+exit();
+?>
+</nav>
