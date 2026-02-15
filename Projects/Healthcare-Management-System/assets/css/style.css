@@ -1,0 +1,413 @@
+/* assets/css/style.css */
+
+/* 1. FONTLAR (Senin kodundaki Google Fonts bağlantısı) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* 2. TEMEL DEĞİŞKENLER (ask_question.php'den alındı) */
+:root {
+    --primary: #2563eb;
+    --primary-soft: #e3f2fd;
+    --danger: #ef4444;
+    --success: #16a34a;
+    --card-radius: 18px;
+    --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.18);
+    /* Ekstra renkler (Diğer sayfalardan toplandı) */
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    /* Senin orijinal arka plan gradient'in */
+    background: radial-gradient(circle at top left, #e3f2fd 0, #f4f6f9 40%, #f4f6f9 100%);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* 3. NAVBAR (Birebir senin tasarımın) */
+.navbar {
+    background: #ffffffaa;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    padding: 10px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+.navbar-brand { /* navbar-left yerine bunu kullanacağız */
+    font-weight: 700;
+    letter-spacing: .03em;
+    font-size: 18px;
+    color: #0f172a;
+    text-decoration: none;
+}
+.navbar-right {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+/* Nav Butonları (Login/Logout/Back) */
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid rgba(37, 99, 235, 0.25);
+    background: rgba(37, 99, 235, 0.08);
+    color: #2563eb;
+    transition: transform .12s ease, filter .12s ease;
+    font-size: 13px;
+    cursor: pointer;
+}
+.nav-btn:hover { transform: translateY(-1px); filter: brightness(1.02); }
+.nav-btn.logout, .nav-btn.btn-danger {
+    border: 1px solid rgba(220, 38, 38, 0.25);
+    background: rgba(220, 38, 38, 0.08);
+    color: #dc2626;
+}
+.nav-btn.btn-primary { /* Login butonu için ek */
+    background: var(--primary);
+    color: #fff;
+    border: 1px solid var(--primary);
+}
+
+/* 4. SAYFA DÜZENİ VE KARTLAR */
+.container { /* .page sınıfı yerine container kullanacağız standart olsun diye */
+    max-width: 1100px;
+    margin: 32px auto 40px;
+    padding: 0 18px 40px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    padding: 26px 30px 28px;
+    margin-bottom: 20px;
+}
+
+.page-title {
+    font-size: 26px;
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #111827;
+}
+.page-title .icon {
+    width: 32px; height: 32px;
+    border-radius: 999px;
+    background: var(--primary-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--primary);
+}
+.page-sub {
+    margin: 0 0 20px;
+    font-size: 14px;
+    color: #6b7280;
+}
+.section-title {
+    margin: 24px 0 12px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* 5. FORMLAR */
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+select, textarea, input[type="text"], input[type="date"], input[type="time"], input[type="password"], input[type="email"] {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid #d1d5db;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #f9fafb;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    box-sizing: border-box; /* padding taşmasını önler */
+}
+select:focus, textarea:focus, input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+textarea { resize: vertical; min-height: 90px; }
+
+/* 6. BUTONLAR */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 12px 26px rgba(37, 99, 235, 0.45);
+    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    text-decoration: none;
+}
+.btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.50);
+}
+
+/* 7. ALERTLER */
+.alert {
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 13px;
+    margin: 14px 0;
+}
+.alert-error {
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.7);
+    color: #b91c1c;
+}
+.alert-success {
+    background: rgba(22, 163, 74, 0.08);
+    border: 1px solid rgba(22, 163, 74, 0.7);
+    color: #166534;
+}
+
+/* 8. TABLOLAR (patient_reports ve medical_records için) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 10px;
+}
+th, td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+th {
+    background: #f9fafb;
+    font-weight: 700;
+    color: #374151;
+}
+tr:last-child td { border-bottom: none; }
+
+/* 9. BADGES (Durum etiketleri) */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.badge.pending { background: #fef3c7; color: #92400e; }
+.badge.approved, .badge.answered, .badge.completed { background: #d1fae5; color: #065f46; }
+.badge.cancelled, .badge.rejected { background: #fee2e2; color: #991b1b; }
+
+/* 10. MOBİL UYUMLULUK */
+@media (max-width: 768px) {
+    .card { padding: 22px 18px 22px; }
+    .page-title { font-size: 22px; }
+    .navbar { padding: 10px 18px; }
+    .table-responsive { overflow-x: auto; }
+}
+
+/* assets/css/style.css EN ALTINA EKLE */
+
+/* --- AUTH SAYFALARI (Login/Register) İÇİN ÖZEL KURALLAR --- */
+
+.auth-wrapper {
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.auth-wrapper.wide {
+    max-width: 500px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.auth-title {
+    font-size: 24px;
+    color: var(--primary);
+    margin: 0 0 8px 0;
+}
+
+.auth-subtitle {
+    color: #6b7280;
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Form Elemanları Arasındaki Boşluk (Eski mb-20 yerine) */
+.form-group {
+    margin-bottom: 16px;
+}
+
+/* Login/Register içindeki butonlar otomatik tam genişlik olsun (Eski w-100 yerine) */
+.auth-wrapper .btn {
+    width: 100%;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.link-primary {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-primary:hover {
+    text-decoration: underline;
+}
+
+/* Register sayfası için yan yana kutular */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+/* --- REGISTER & DASHBOARD EKLEMELERİ --- */
+
+/* Register Formu: Yan yana duran inputlar için */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* DASHBOARD YAPISI */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Sol taraf geniş, sağ taraf dar */
+    gap: 20px;
+    align-items: start;
+}
+
+/* Hoşgeldin Kartı (En üstte boydan boya) */
+.welcome-card {
+    grid-column: span 2;
+}
+
+/* İstatistik Kutuları (Kan grubu, randevu sayısı vb.) */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-box {
+    background: var(--primary-soft);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.stat-box:hover { transform: translateY(-2px); filter: brightness(0.98); }
+
+.stat-number {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 5px;
+}
+
+/* Başlık ve Butonu Yan Yana Getirmek İçin */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.section-header h2 { margin: 0; font-size: 18px; color: var(--text-main); }
+
+/* Listeler (Randevu, İlaç, Kişi listeleri) */
+.list-none { list-style: none; padding: 0; margin: 0; }
+
+.list-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+.list-item:last-child { border-bottom: none; }
+
+.list-item strong { display: block; color: var(--text-main); font-size: 14px; font-weight: 600; }
+.list-item span, .list-item p { color: #6b7280; font-size: 13px; margin: 2px 0 0; display: block; }
+
+/* Sağ alttaki "Soru Sor" butonu */
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--primary);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    text-decoration: none;
+    z-index: 100;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.floating-btn:hover { transform: translateY(-3px); }
+
+/* MOBİL İÇİN AYARLAR */
+@media (max-width: 768px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .welcome-card { grid-column: span 1; }
+    .form-row { grid-template-columns: 1fr; }
+}
